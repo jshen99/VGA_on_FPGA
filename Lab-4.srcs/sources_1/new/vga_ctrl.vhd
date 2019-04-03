@@ -35,18 +35,18 @@ entity vga_ctrl is
     Port ( signal clk : in std_logic;
            signal en : in std_logic;
            signal hcount, vcount : out std_logic_vector(9 downto 0);
-           signal vid, hs, vs : out std_logic
+           signal vid, hs, vs : out std_logic := '1'
            );
 end vga_ctrl;
 
 architecture Behavioral of vga_ctrl is
 
-signal hcounter : std_logic_vector(9 downto 0);
-signal vcounter : std_logic_vector(9 downto 0);
+signal hcounter : std_logic_vector(9 downto 0) := (others => '0');
+signal vcounter : std_logic_vector(9 downto 0) := (others => '0');
 
 
 begin
-
+--one process for incrementing vcounter and hcounter
 process(clk)
 begin
 if(rising_edge(clk))then
@@ -57,33 +57,45 @@ if(rising_edge(clk))then
         else
             hcounter <= (others => '0');
         end if;
+        
         if unsigned(vcounter) < 525 then
             vcounter <= std_logic_vector(unsigned(vcounter)+1);
         else
             vcounter <= (others => '0');
         end if;
         
-        if unsigned(vcounter) >= 0 and unsigned(vcounter) < 480 and unsigned(hcounter) >= 0 and unsigned(hcounter) < 640 then
-            vid <= '1';
-        else 
-            vid <= '0';
-        end if;
-        
-        if unsigned(hcounter) > 655 and unsigned(hcounter) < 752 then
-            hs <= '0';  
-        else
-            hs <= '1';
-        end if;
-        
-        if unsigned(vcounter) > 489 and unsigned(vcounter) < 492 then
-            vs <= '0';
-        else
-            vs <= '1';
-        end if;
+       
     end if; 
 
 end if;
 end process;
+
+--another process for updating vid, hs and vs
+process(clk)
+begin
+if(rising_edge(clk)) then
+    if en = '1' then
+        
+         if unsigned(vcounter) >= 0 and unsigned(vcounter) < 479 and unsigned(hcounter) >= 0 and unsigned(hcounter) < 639 then
+               vid <= '1';
+           else 
+               vid <= '0';
+           end if;
+           
+           if unsigned(hcounter) > 654 and unsigned(hcounter) < 751 then
+               hs <= '0';  
+           else
+               hs <= '1';
+           end if;
+           
+           if unsigned(vcounter) > 489 and unsigned(vcounter) < 491 then
+               vs <= '0';
+           else
+               vs <= '1';
+           end if;
+      end if;
+ end if;
+ end process;
 
 
 hcount <=  hcounter;
