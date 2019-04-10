@@ -25,7 +25,7 @@ process(clock_in)
     begin
         if rising_edge(clock_in) then
             count <= std_logic_vector(unsigned(count)+1);
-            if unsigned(count) = 5 then
+            if unsigned(count) = 4 then
                 clock_out <= '1';
                 count <= (others => '0');
             else
