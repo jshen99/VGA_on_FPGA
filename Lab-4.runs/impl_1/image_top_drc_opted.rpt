@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
-| Date         : Thu Apr 11 12:29:18 2019
+| Date         : Thu Apr 11 13:03:25 2019
 | Host         : ece07 running 64-bit Ubuntu 16.04.5 LTS
 | Command      : report_drc -file image_top_drc_opted.rpt -pb image_top_drc_opted.pb -rpx image_top_drc_opted.rpx
 | Design       : image_top

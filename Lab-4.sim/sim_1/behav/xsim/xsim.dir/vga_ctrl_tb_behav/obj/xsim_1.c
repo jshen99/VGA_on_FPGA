@@ -43,18 +43,19 @@
 #define alloca _alloca
 #endif
 typedef void (*funcp)(char *, char *);
-extern void execute_29(char*, char *);
+extern void execute_30(char*, char *);
 extern void execute_26(char*, char *);
 extern void execute_27(char*, char *);
 extern void execute_28(char*, char *);
+extern void execute_29(char*, char *);
 extern void vhdl_transfunc_eventcallback(char*, char*, unsigned, unsigned, unsigned, char *);
 extern void transaction_1(char*, char*, unsigned, unsigned, unsigned);
-funcp funcTab[6] = {(funcp)execute_29, (funcp)execute_26, (funcp)execute_27, (funcp)execute_28, (funcp)vhdl_transfunc_eventcallback, (funcp)transaction_1};
-const int NumRelocateId= 6;
+funcp funcTab[7] = {(funcp)execute_30, (funcp)execute_26, (funcp)execute_27, (funcp)execute_28, (funcp)execute_29, (funcp)vhdl_transfunc_eventcallback, (funcp)transaction_1};
+const int NumRelocateId= 7;
 
 void relocate(char *dp)
 {
-	iki_relocate(dp, "xsim.dir/vga_ctrl_tb_behav/xsim.reloc",  (void **)funcTab, 6);
+	iki_relocate(dp, "xsim.dir/vga_ctrl_tb_behav/xsim.reloc",  (void **)funcTab, 7);
 	iki_vhdl_file_variable_register(dp + 3496);
 	iki_vhdl_file_variable_register(dp + 3552);
 
