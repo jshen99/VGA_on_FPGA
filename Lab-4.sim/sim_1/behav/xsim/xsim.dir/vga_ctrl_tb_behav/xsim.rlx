@@ -1,8 +1,8 @@
 
 { 
-    crc :  2639230654093854926  , 
+    crc :  4294873487783788700  , 
     ccp_crc :  0  , 
-    cmdline : " -wto cacf0a7358ed4f47b9edbeb8af23b2f1 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot vga_ctrl_tb_behav xil_defaultlib.vga_ctrl_tb" , 
+    cmdline : " -wto cacf0a7358ed4f47b9edbeb8af23b2f1 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip -L xpm --snapshot vga_ctrl_tb_behav xil_defaultlib.vga_ctrl_tb" , 
     buildDate : "Jun 14 2018" , 
     buildTime : "20:07:38" , 
     linkCmd : "/usr/bin/gcc -Wa,-W  -O -fPIC  -m64  -Wl,--unresolved-symbols=ignore-all  -o \"xsim.dir/vga_ctrl_tb_behav/xsimk\"   \"xsim.dir/vga_ctrl_tb_behav/obj/xsim_0.lnx64.o\" \"xsim.dir/vga_ctrl_tb_behav/obj/xsim_1.lnx64.o\" \"/usr/local/xilinx/Vivado/2018.2/lib/lnx64.o/librdi_simulator_kernel.so\"  \"/usr/local/xilinx/Vivado/2018.2/lib/lnx64.o/librdi_simbridge_kernel.so\"" , 

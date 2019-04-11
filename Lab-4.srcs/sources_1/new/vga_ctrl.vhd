@@ -51,42 +51,44 @@ process(clk)
 begin
 if(rising_edge(clk))then
     if en = '1' then
-    --First half of the process assigns values to vid, hs and vs
-        if unsigned(hcounter) >= 0 and unsigned(hcounter) <= 639 and unsigned(vcounter) >= 0 and unsigned(vcounter) <= 479 then
-            vid <= '1';
-        else
-            vid <= '0';
-        end if;
-        
-        if unsigned(hcounter) >= 655 and unsigned(hcounter) <= 750 then
-            hs <= '0';
-        else
-            hs <= '1';
-        end if; 
-        
-        if unsigned(vcounter) >= 489 and unsigned(vcounter) <= 490 then
-            vs <= '0';
-        else
-            vs <= '1';
-        end if;
-        
-        
-        
+
      --Second half of the process increments to next stage of hcounter and vcounter
-        if unsigned(hcounter) < 800 then
+        if unsigned(hcounter) < 799 then
             hcounter <= std_logic_vector(unsigned(hcounter)+1);
         else
             hcounter <= (others => '0');
             --Only increments vcounter when hcounter has been reset to 0
-                    if unsigned(vcounter) < 525 then
+                    if unsigned(vcounter) < 524 then
                         vcounter <= std_logic_vector(unsigned(vcounter)+1);
-                    elsif unsigned(vcounter) >= 525 then
+                    else
                         vcounter <= (others => '0');
                     end if; 
         end if;
         
     end if; 
 end if;
+end process;
+
+process(hcounter ,vcounter)
+begin
+    --First half of the process assigns values to vid, hs and vs
+    if unsigned(hcounter) < 640 and unsigned(vcounter) < 480 then
+        vid <= '1';
+    else
+        vid <= '0';
+    end if;
+    
+    if unsigned(hcounter) >= 656 and unsigned(hcounter) <= 751 then
+        hs <= '0';
+    else
+        hs <= '1';
+    end if; 
+    
+    if unsigned(vcounter) >= 490 and unsigned(vcounter) <= 491 then
+        vs <= '0';
+    else
+        vs <= '1';
+    end if;
 end process;
 
 hcount <=  hcounter;

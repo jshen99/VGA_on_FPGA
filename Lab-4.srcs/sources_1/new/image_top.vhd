@@ -101,7 +101,7 @@ pixel_push : pixel_pusher port map(
 );
 
 pic : picture port map(
-    clka => clk,
+    clka => enable,
     addra => addr,
     douta => douta
 );
