@@ -46,57 +46,48 @@ signal vcounter : std_logic_vector(9 downto 0) := (others => '0');
 
 
 begin
---one process for incrementing vcounter and hcounter
+
 process(clk)
 begin
 if(rising_edge(clk))then
     if en = '1' then
-    
+    --First half of the process assigns values to vid, hs and vs
+        if unsigned(hcounter) >= 0 and unsigned(hcounter) <= 639 and unsigned(vcounter) >= 0 and unsigned(vcounter) <= 479 then
+            vid <= '1';
+        else
+            vid <= '0';
+        end if;
+        
+        if unsigned(hcounter) >= 655 and unsigned(hcounter) <= 750 then
+            hs <= '0';
+        else
+            hs <= '1';
+        end if; 
+        
+        if unsigned(vcounter) >= 489 and unsigned(vcounter) <= 490 then
+            vs <= '0';
+        else
+            vs <= '1';
+        end if;
+        
+        
+        
+     --Second half of the process increments to next stage of hcounter and vcounter
         if unsigned(hcounter) < 800 then
             hcounter <= std_logic_vector(unsigned(hcounter)+1);
         else
             hcounter <= (others => '0');
+            --Only increments vcounter when hcounter has been reset to 0
+                    if unsigned(vcounter) < 525 then
+                        vcounter <= std_logic_vector(unsigned(vcounter)+1);
+                    elsif unsigned(vcounter) >= 525 then
+                        vcounter <= (others => '0');
+                    end if; 
         end if;
         
-        if unsigned(vcounter) < 525 then
-            vcounter <= std_logic_vector(unsigned(vcounter)+1);
-        else
-            vcounter <= (others => '0');
-        end if;
-        
-       
     end if; 
-
 end if;
 end process;
-
---another process for updating vid, hs and vs
-process(clk)
-begin
-if(rising_edge(clk)) then
-    if en = '1' then
-        
-         if unsigned(vcounter) >= 0 and unsigned(vcounter) < 479 and unsigned(hcounter) >= 0 and unsigned(hcounter) < 639 then
-               vid <= '1';
-           else 
-               vid <= '0';
-           end if;
-           
-           if unsigned(hcounter) > 654 and unsigned(hcounter) < 751 then
-               hs <= '0';  
-           else
-               hs <= '1';
-           end if;
-           
-           if unsigned(vcounter) > 489 and unsigned(vcounter) < 491 then
-               vs <= '0';
-           else
-               vs <= '1';
-           end if;
-      end if;
- end if;
- end process;
-
 
 hcount <=  hcounter;
 vcount <= vcounter;

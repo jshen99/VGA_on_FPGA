@@ -50,7 +50,6 @@ signal addr : std_logic_vector(17 downto 0);
 
 component picture is
 port(addra : in std_logic_vector(17 downto 0);
-     wea : in std_logic;
      clka : in std_logic;
      douta : out std_logic_vector(7 downto 0)
      );
@@ -103,7 +102,6 @@ pixel_push : pixel_pusher port map(
 
 pic : picture port map(
     clka => clk,
-    wea => enable,
     addra => addr,
     douta => douta
 );
